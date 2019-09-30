@@ -44,8 +44,8 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
-    '@nuxtjs/dotenv',
-    '@nuxtjs/markdownit',
+    // '@nuxtjs/dotenv',
+    // '@nuxtjs/markdownit',
   ],
   /*
   ** Build configuration
@@ -59,11 +59,11 @@ export default {
   generate: {
     routes() {
       return client
-        .getEntries({ content_type: 'post' })
+        .getEntries({ content_type: 'blog' })
         .then(entries => {
           return entries.items.map(entry => {
             return {
-              route: "/posts/" + entry.fields.slug,
+              route: "/blog/" + entry.fields.slug,
               payload: entry
             }
           })

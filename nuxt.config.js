@@ -1,3 +1,5 @@
+require("dotenv").config()
+const client = require("./plugins/contentful")
 
 export default {
   mode: 'spa',
@@ -23,11 +25,13 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/scss/app.scss',
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/contentful'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,10 +44,36 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/markdownit',
   ],
   /*
   ** Build configuration
   */
+ markdownit: {
+   injected: true,
+   html: true,
+   linkify: true,
+   typography: true,
+  },
+  generate: {
+    routes() {
+      return client
+        .getEntries({ content_type: 'post' })
+        .then(entries => {
+          return entries.items.map(entry => {
+            return {
+              route: "/posts/" + entry.fields.slug,
+              payload: entry
+            }
+          })
+        })
+    }
+  },
+  env: {
+    CTF_SPACE_ID: "rpp9rqpod3d1",
+    CTF_ACCESS_TOKEN: "gTLEoKX1Ypssr5gO597y6cpGqCJI71YAsZQbK21yFk4",
+  },
   build: {
     /*
     ** You can extend webpack config here

@@ -1,11 +1,24 @@
-asyncData ({ env }) {
-  return client.getEntries({
-    'content_type': env.CTF_BLOG_POST_TYPE_ID,
-    order: '-fields.publishDate',
-    'limit': 3
-  }).then(entries => {
-    return {
-      posts: entries.items
-    }
-  }).catch(console.error)
+<template>
+  <div class="posts">
+    <div v-for="(post, index) in posts" :key="index" class="post">
+      {{ post.fields.title }}
+    </div>
+  </div>
+</template>
+
+<script>
+import client from '~/plugins/contentful'
+export default {
+  asyncData({ params }) {
+    return client
+      .getEntries({
+        content_type: 'post',
+        order: '-sys.createdAt',
+      })
+      .then(entries => {
+        return { posts: entries.items }
+      })
+      .catch(e => console.log(e))
+  },
 }
+</script>

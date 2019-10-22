@@ -6,7 +6,7 @@
     </div>
   </header>
   <body>
-    <div id="about">
+    <div class="waku" id="about">
       <div class="container">
         <div class="title">
           <h2>#ABOUT</h2>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div id="event">
+    <div class="waku" id="article">
       <div class="container">
         <div class="title">
           <h2>#BLOG</h2>

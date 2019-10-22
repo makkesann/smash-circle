@@ -1,14 +1,39 @@
 <template>
-  <section class="latest-posts">
+<div>
+  <header>
+    <div id="top">
+      <h1 id="header_title" class="display-1 text-center font-weight-bold">関西学院大学<br>スマブラサークル</h1>
+    </div>
+  </header>
+  <body>
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 sp-center">
+            <h2>#ABOUT</h2>
+            <h3>三田から世界へ</h3>
+            <p class="text">
+              スマブラで強くなりたいという人はもちろんいろんなことで遊びたいという人も歓迎しています！<br>
+              <br>
+              スマブラを中心としていろいろなことで遊んで仲良くなるサークルです。
+            </p>
+            <button href="/about" type="button" class="read_more">Read more ＞</button>
+          </div>
+          <div class="col-md-6 mt-md-0 mt-5">
+          </div>
+        </div>
+      </div>
+    </div>    
     <div class="posts">
-      <nuxt-link :to="'blog/'+post.fields.slug" class="post" v-for="(post, index) in posts" :key="index">
+      <nuxt-link :to="'blogs/'+post.fields.slug" class="post" v-for="(post, index) in posts" :key="index">
         <div class="post-text">
           <p>{{ formatDate(post.sys.createdAt) }}</p>
           <h2>{{ post.fields.title }}</h2>
         </div>
       </nuxt-link>
     </div>
-  </section>
+  </body>
+</div>
 </template>
 
 <script>
@@ -39,48 +64,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-section.latest-posts {
-  padding: 10px;
-  .posts {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background: #ddd;
-    a.post {
-      width: calc(100% / 2 - 20px);
-      @media (min-width: (768px)) {
-        width: calc(100% / 3 - 20px);
-      }
-      margin: 10px;
-      background: #fff;
-      text-decoration: none;
-      color: #111;
-      .thumb {
-        width: 100%;
-        padding-bottom: 75%;
-        position: relative;
-        overflow: hidden;
-        img {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          max-width: 100%;
-        }
-      }
-      .post-text {
-        padding: 5px 10px 10px;
-        h2 {
-          width: fit-content;
-          font-size: 20px;
-        }
-      }
-    }
-  }
-}
-</style>

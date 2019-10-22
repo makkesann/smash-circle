@@ -63,7 +63,7 @@ export default {
         .then(entries => {
           return entries.items.map(entry => {
             return {
-              route: "/blog/" + entry.fields.slug,
+              route: "/blogs/" + entry.fields.slug,
               payload: entry
             }
           })

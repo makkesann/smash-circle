@@ -3,13 +3,15 @@
     <div class="single">
       <h1 class="post-title">{{ post.fields.title }}</h1>
       <p class="post-created-at">{{ formatDate(post.sys.createdAt) }}</p>
-      <p class="post-body">{{post.fields.body}}</p>
+      <div v-html="toHtmlString(post.fields.body)"></div>
     </div>
   </article>
 </template>
 
 <script>
 import client from '~/plugins/contentful'
+import { BLOCKS } from '@contentful/rich-text-types';
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 
 export default {
   asyncData({ params, error, payload }) {
@@ -39,6 +41,15 @@ export default {
       const mm = new String(date.getMonth() + 1).padStart(2, "0")
       const dd = new String(date.getDate()).padStart(2, "0")
       return `${yyyy}.${mm}.${dd}`
+    },
+    toHtmlString(obj) {
+      const options = {
+        renderNode: {
+          [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
+              `<img src="${fields.file.url}"/>`,
+        },
+      }
+      return documentToHtmlString(obj, options);
     }
   }
 }

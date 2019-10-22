@@ -2,7 +2,7 @@
 <div>
   <header>
     <div id="top">
-      <h1 id="header_title" class="display-1 text-center font-weight-bold">関西学院大学<br>スマブラサークル</h1>
+      <h1 id="header_title" class="display-1 text-center font-weight-bold">関西学院大学<br>スマブラ<br class="sp">サークル</h1>
     </div>
   </header>
   <body>
@@ -23,7 +23,31 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>
+    <div id="event">
+      <div class="container">
+        <div class="title">
+          <h2>#EVENT</h2>
+          <h3>イベント</h3>
+        </div>
+        <div class="col-md-11 mx-auto">
+          <div class="row">
+            <div class="col-md-6">
+              <nuxt-link :to="'blogs/'+post_newest.fields.slug">
+
+              </nuxt-link>
+            </div>
+            <div class="col-md-6">
+              <div class="eventBox">
+                <h4>{{ post_newest.fields.title }}</h4>
+                <p>{{ post_newest.fields.highlight }}</p>
+                <nuxt-link :to="'blogs/'+post_newest.fields.slug" class="read_more">Read more ＞</nuxt-link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="posts">
       <nuxt-link :to="'blogs/'+post.fields.slug" class="post" v-for="(post, index) in posts" :key="index">
         <div class="post-text">
@@ -46,7 +70,10 @@ export default {
         order: '-sys.createdAt',
       })
       .then(entries => {
-        return { posts: entries.items }
+        return {
+          posts: entries.items,
+          post_newest: entries.items[0],
+         }
       })
       .catch(e => console.log(e))
   },

@@ -24,16 +24,39 @@ html{
     }
 
     body{
+        .read_more{
+            background: #ffffff;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            color: #000000;
+            padding: 10px 40px;
+        }
         #about{
             background-color: #eeeeee;
 
-            .read_more{
-                background: #ffffff;
-                border-radius: 5px;
-                border: 1px solid #000000;
-                color: #000000;
-                padding: 10px 40px;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .sp {
+      display: none !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    html{
+        header{
+            #top{
+                #header_title{
+                    font-size: 50px;
+                    -webkit-text-stroke: 0.7px white;
+                }
             }
+        }
+
+        body{
+
         }
     }
 }

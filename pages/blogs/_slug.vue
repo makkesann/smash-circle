@@ -1,11 +1,33 @@
 <template>
-  <article class="article">
-    <div class="single">
-      <h1 class="post-title">{{ post.fields.title }}</h1>
-      <p class="post-created-at">{{ formatDate(post.sys.createdAt) }}</p>
-      <div v-html="toHtmlString(post.fields.body)"></div>
-    </div>
-  </article>
+  <div id="blogpage">
+    <article class="article">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div id="breadcrumb">
+              <ul>
+                <li><a href="/"><i class="fas fa-home"></i> HOME</a></li>
+                <li>＞</li>
+                <li><a href="/blogs">ブログ一覧ページ</a></li>
+                <li>＞</li>
+                <li>{{ post.fields.title }}</li>
+              </ul>
+            </div>
+            <picture>
+              <source :srcset="post.fields.images.fields.file.url" type="image/png" />
+              <img :src="post.fields.images.fields.file.url" class="img-fluid my-0 w-100">
+            </picture>
+            <h1>
+              {{ post.fields.title }}<br>
+              {{ post.fields.subtitle }}
+            </h1>
+            <p class="post-created-at">{{ formatDate(post.sys.createdAt) }}</p>
+            <div v-html="renderHtml(post.fields.body)"></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
 </template>
 
 <script>
@@ -42,11 +64,15 @@ export default {
       const dd = new String(date.getDate()).padStart(2, "0")
       return `${yyyy}.${mm}.${dd}`
     },
-    toHtmlString(obj) {
+    renderHtml(obj) {
       const options = {
         renderNode: {
           [BLOCKS.EMBEDDED_ASSET]: ({ data: { target: { fields }}}) =>
-              `<img src="${fields.file.url}"/>`,
+                `<picture>
+                  <source srcset="${fields.file.url}" type="image/webp" />
+                  <source srcset="${fields.file.url}" type="image/jpeg" />
+                  <img src="${fields.file.url}" class="img-fluid w-100" />
+                </picture>`,
         },
       }
       return documentToHtmlString(obj, options);
@@ -54,41 +80,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-article.article {
-  padding: 10px;
-  .single {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 10px;
-    color: #222;
-    border: 2px solid #444;
-    border-radius: 10px;
-    h1, h2, h3 {
-      margin: 16px 0;
-    }
-    h1.post-title {
-      font-size: 32px;
-      text-decoration: underline;
-    }
-    .post-content {
-      h1 {
-        font-size: 32px;
-      }
-      h2 {
-        font-size: 24px;
-        background: #ccc
-      }
-      p {
-        margin: 16px 0;
-        font-size: 16px;
-      }
-      img {
-        max-width: 100%;
-        border: 1px solid #000;
-      }
-    }
-  }
-}
-</style>

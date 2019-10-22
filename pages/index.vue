@@ -8,9 +8,12 @@
   <body>
     <div id="about">
       <div class="container">
+        <div class="title">
+          <h2>#ABOUT</h2>
+          <h3>紹介</h3>
+        </div>
         <div class="row">
           <div class="col-md-6 sp-center">
-            <h2>#ABOUT</h2>
             <h3>三田から世界へ</h3>
             <p class="text">
               スマブラで強くなりたいという人はもちろんいろんなことで遊びたいという人も歓迎しています！<br>
@@ -20,6 +23,9 @@
             <button href="/about" type="button" class="read_more">Read more ＞</button>
           </div>
           <div class="col-md-6 mt-md-0 mt-5">
+            <picture class="d-block">
+              <img :src="require('~/assets/images/header.webp')" class="img-fluid top-about-img" alt="古き良き商店街で多世代向けにイノベーションを起こす！" />
+            </picture>
           </div>
         </div>
       </div>
@@ -27,14 +33,16 @@
     <div id="event">
       <div class="container">
         <div class="title">
-          <h2>#EVENT</h2>
-          <h3>イベント</h3>
+          <h2>#BLOG</h2>
+          <h3>記事</h3>
         </div>
         <div class="col-md-11 mx-auto">
           <div class="row">
             <div class="col-md-6">
               <nuxt-link :to="'blogs/'+post_newest.fields.slug">
-
+                <picture>
+                  <img :src="post_newest.fields.images.fields.file.url" class="img-fluid">
+                </picture>
               </nuxt-link>
             </div>
             <div class="col-md-6">

@@ -78,7 +78,7 @@ export default {
       .catch(e => console.log(e))
   },
   head: {
-    title: '記事一覧',
+    title: '関西学院大学スマブラサークル',
   },
   methods: {
     formatDate(iso) {

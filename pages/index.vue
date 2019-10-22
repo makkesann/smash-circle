@@ -36,21 +36,19 @@
           <h2>#BLOG</h2>
           <h3>記事</h3>
         </div>
-        <div class="col-md-11 mx-auto">
-          <div class="row">
-            <div class="col-md-6">
-              <nuxt-link :to="'blogs/'+post_newest.fields.slug">
-                <picture>
-                  <img :src="post_newest.fields.images.fields.file.url" class="img-fluid">
-                </picture>
-              </nuxt-link>
-            </div>
-            <div class="col-md-6">
-              <div class="eventBox">
-                <h4>{{ post_newest.fields.title }}</h4>
-                <p>{{ post_newest.fields.highlight }}</p>
-                <nuxt-link :to="'blogs/'+post_newest.fields.slug" class="read_more">Read more ＞</nuxt-link>
-              </div>
+        <div class="row">
+          <div class="col-md-6">
+            <nuxt-link :to="'blogs/'+post_newest.fields.slug">
+              <picture>
+                <img :src="post_newest.fields.images.fields.file.url" class="img-fluid">
+              </picture>
+            </nuxt-link>
+          </div>
+          <div class="col-md-6">
+            <div class="eventBox">
+              <h4>{{ post_newest.fields.title }}</h4>
+              <p>{{ post_newest.fields.highlight }}</p>
+              <nuxt-link :to="'blogs/'+post_newest.fields.slug" class="read_more">Read more ＞</nuxt-link>
             </div>
           </div>
         </div>

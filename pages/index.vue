@@ -1,10 +1,7 @@
 <template>
-<div>
-  <header>
-    <div id="top">
-      <h1 id="header_title" class="display-1 text-center font-weight-bold">関西学院大学<br>スマブラ<br class="sp">サークル</h1>
-    </div>
-  </header>
+<div id="top">
+  <Menubar/>
+  <Header title='関西学院大学<br>スマブラ<br class="sp">サークル'></Header>
   <body>
     <div class="waku" id="about">
       <div class="container">
@@ -20,7 +17,8 @@
               <br>
               スマブラを中心としていろいろなことで遊んで仲良くなるサークルです。
             </p>
-            <button href="/about" type="button" class="read_more">Read more ＞</button>
+            <nuxt-link to="/about" type="button" class="read_more">Read more ＞</nuxt-link>
+            <!-- <button href="/about" type="button" class="read_more">Read more ＞</button> -->
           </div>
           <div class="col-md-6 mt-md-0 mt-5">
             <picture class="d-block">
@@ -36,7 +34,7 @@
           <h2>#BLOG</h2>
           <h3>記事</h3>
         </div>
-        <div class="row">
+        <div class="row" id="blog-content">
           <div class="col-md-6">
             <nuxt-link :to="'blogs/'+post_newest.fields.slug">
               <picture>
@@ -47,6 +45,7 @@
           <div class="col-md-6">
             <div class="eventBox">
               <h4>{{ post_newest.fields.title }}</h4>
+              <h5>{{ formatDate(post_newest.sys.createdAt) }}</h5>
               <p>{{ post_newest.fields.highlight }}</p>
               <nuxt-link :to="'blogs/'+post_newest.fields.slug" class="read_more">Read more ＞</nuxt-link>
             </div>
@@ -67,6 +66,8 @@
 </template>
 
 <script>
+import Header from "~/components/Header.vue"
+import Menubar from "~/components/Menubar.vue"
 import client from '~/plugins/contentful'
 export default {
   asyncData({ params }) {
@@ -86,6 +87,12 @@ export default {
   head: {
     title: '関西学院大学スマブラサークル',
   },
+
+  components:{
+    Header,
+    Menubar
+  },
+  
   methods: {
     formatDate(iso) {
       const date = new Date(iso)

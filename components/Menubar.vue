@@ -16,16 +16,15 @@
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
-              <template v-slot:button-content>
-                <em>User</em>
-              </template>
-              <b-dropdown-item to="#">Profile</b-dropdown-item>
-              <b-dropdown-item to="#">Sign Out</b-dropdown-item>
-            </b-nav-item-dropdown>
-          </b-navbar-nav>
+          <div class="ml-auto nav-icon">
+            <div class="d-inline-block">
+              <nuxt-link to="#"><img src="~assets/images/footer-twitter.png" alt=""></nuxt-link>
+            </div>
+            <div class="d-inline-block">
+
+              <nuxt-link to="#"><img src="~assets/images/footer-line.png" alt=""></nuxt-link>
+            </div>
+          </div>
         </b-collapse>
       </b-navbar>
     </div>
